@@ -5,6 +5,7 @@ import { Route, Link, Switch } from 'react-router-dom';
 //Component Files
 import Display from './components/Display.js';
 import Form from './components/Form.js';
+import Show from './components/Show.js';
 
 const baseURL = 'http://localhost:3000';
 console.log('Current Base URL:', baseURL);
@@ -17,6 +18,7 @@ const blankMovie = {
 
 const App = (props) => {
   const [movies, setMovies] = React.useState([])
+  const [selectedMovie, setSelectedMovie] = React.useState([]);
 
   const getMovies = async () => {
     const res = await fetch(baseURL + '/movies');
@@ -26,6 +28,10 @@ const App = (props) => {
   }
 
   React.useEffect(() => { getMovies() }, []);
+
+  const getMovie = (selected) => {
+    setSelectedMovie(selected)
+  }
 
   return (
     <div>
@@ -37,18 +43,28 @@ const App = (props) => {
         <button>NEW</button>
       </Link>
       <Switch>
-        <Route 
-          exact
+        <Route exact
           path='/movies' 
           render = { (rp) => 
-            <Display {...rp} url={baseURL} getMovies={getMovies} movies={movies} />
+            <Display {...rp} url={baseURL} getMovies={getMovies} movies={movies} getMovie={getMovie} />
             }
         />
-        <Route
-          exact
+        <Route exact
           path='/movies/new'
           render = { (rp) => 
             <Form {...rp} type='new' url={baseURL} movie={blankMovie} getMovies={getMovies}/>
+          }
+        />
+        <Route exact
+          path='/movies/:id'
+          render = { (rp) =>
+            <Show {...rp} movie={selectedMovie}/>
+          }
+        />
+        <Route exact
+          path='/movies/edit/:id'
+          render = { (rp) =>
+            <Form {...rp} url={baseURL} movie={selectedMovie} getMovies={getMovies}/>
           }
         />
       </Switch>

@@ -3,6 +3,7 @@ import React from 'react';
 const Display = (props) => {
     const movies = props.movies;
 
+
     const deleteMovie = async (movieToDelete) => {
         await fetch(props.url + '/movies/' + movieToDelete.id, {
             method: 'delete'
@@ -16,7 +17,15 @@ const Display = (props) => {
             <div key={movie.id}>
                 <h3>{movie.title}</h3>
                 <h5>{movie.year}</h5>
-                <img src={movie.poster_url} />
+                <img src={movie.poster_url} 
+                    onClick={() => {
+                        props.getMovie(movie);
+                        props.history.push(`/movies/${movie.id}`) 
+                    }} />
+                <button onClick={() => {
+                    props.getMovie(movie);
+                    props.history.push(`/movies/edit/${movie.id}`)
+                }}>Edit</button>
                 <button onClick={() => deleteMovie(movie)}>Delete</button>
             </div>
             ))}

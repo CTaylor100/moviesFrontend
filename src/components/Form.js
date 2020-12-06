@@ -13,16 +13,29 @@ const Form = (props) => {
         e.preventDefault()
         await fetch(props.url + '/movies', {
             method: 'POST',
+            body: JSON.stringify(formMovie),
             headers: {
                 "Content-Type":"application/json"
-            },
-            body: JSON.stringify(formMovie)
+            }
         })
         props.getMovies()
         props.history.push('/movies')
     }
 
-    const action = (props.type === 'new') ? handleCreate : null;
+    const handleEdit = async (e) => {
+        e.preventDefault()
+        await fetch(props.url + '/movies/' + formMovie.id, {
+            method: 'PUT',
+            body: JSON.stringify(formMovie),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        })
+        props.getMovies()
+        props.history.push('/movies')
+    }
+
+    const action = (props.type === 'new') ? handleCreate : handleEdit ;
 
     
     return (
