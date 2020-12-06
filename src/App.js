@@ -34,14 +34,17 @@ const App = (props) => {
   }
 
   return (
-    <div>
-      <h1>Tis The Season</h1>
-      <Link to='/movies'>
-        <button>HOME</button>
-      </Link>
-      <Link to='/movies/new'>
-        <button>NEW</button>
-      </Link>
+    <div className='App'>
+      <header >
+          <h1>Tis The Season</h1>
+          <Link to='/movies'>
+            <button>HOME</button>
+          </Link>
+          <Link to='/movies/new'>
+            <button>NEW</button>
+          </Link>
+      </header>
+      
       <Switch>
         <Route exact
           path='/movies' 

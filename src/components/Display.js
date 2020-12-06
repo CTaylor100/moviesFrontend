@@ -12,9 +12,9 @@ const Display = (props) => {
     }
 
     const loaded = () => (
-        <div>
+        <div className="flex">
             {movies.map(movie => (
-            <div key={movie.id}>
+            <div className='movieCard' key={movie.id}>
                 <h3>{movie.title}</h3>
                 <h5>{movie.year}</h5>
                 <img src={movie.poster_url} 
