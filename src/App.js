@@ -45,6 +45,7 @@ const App = (props) => {
           </Link>
       </header>
       
+      <div className='content'>
       <Switch>
         <Route exact
           path='/movies' 
@@ -71,7 +72,7 @@ const App = (props) => {
           }
         />
       </Switch>
-
+      </div>
     </div>
   );
 }

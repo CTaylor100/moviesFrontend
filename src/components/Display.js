@@ -15,18 +15,22 @@ const Display = (props) => {
         <div className="flex">
             {movies.map(movie => (
             <div className='movieCard' key={movie.id}>
-                <h3>{movie.title}</h3>
-                <h5>{movie.year}</h5>
+                <div className='title'>
+                    <h4>{movie.title}</h4>
+                </div>                    
+                <h6>{movie.year}</h6>
                 <img src={movie.poster_url} 
                     onClick={() => {
                         props.getMovie(movie);
                         props.history.push(`/movies/${movie.id}`) 
                     }} />
-                <button onClick={() => {
-                    props.getMovie(movie);
-                    props.history.push(`/movies/edit/${movie.id}`)
-                }}>Edit</button>
-                <button onClick={() => deleteMovie(movie)}>Delete</button>
+                <div>
+                    <button onClick={() => {
+                        props.getMovie(movie);
+                        props.history.push(`/movies/edit/${movie.id}`)
+                    }}>Edit</button>
+                    <button onClick={() => deleteMovie(movie)}>Delete</button>
+                </div>
             </div>
             ))}
         </div>
